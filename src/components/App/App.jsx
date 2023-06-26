@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
-import { ContactForm } from './ContactForm';
-import { ContactList } from './ContactList';
-import { Filter } from './Filter';
+import { ContactForm } from '../ContactForm/ContactForm';
+import { ContactList } from '../ContactList/ContactList';
+import { Filter } from '../Filter/Filter';
 import { TitlePhonebook } from './TitlePhonebook.styled';
 import { TitleContacts } from './TitleContacts.styled';
+
 export class App extends Component {
   state = {
     contacts: [
@@ -77,3 +79,19 @@ export class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  filter: PropTypes.string.isRequired,
+  addContact: PropTypes.func.isRequired,
+  deleteContact: PropTypes.func.isRequired,
+  changeFilter: PropTypes.func.isRequired,
+  findContacts: PropTypes.func.isRequired,
+  duplicationContacts: PropTypes.func.isRequired,
+};
